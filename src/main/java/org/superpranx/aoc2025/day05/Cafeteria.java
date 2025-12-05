@@ -9,15 +9,13 @@ import org.superpranx.util.FileReaderUtil;
 
 public class Cafeteria {
 
-  private static final List<Range> removableBoxes = new ArrayList<>();
-
   public static int cafeteriaOne(List<Range> ranges, List<BigInteger> ids) {
     final List<Range> optimizedRanges = optimizeRanges(ranges);
     return ids.stream().mapToInt(id -> idValidityQualifier(optimizedRanges, id)).reduce(0, Integer::sum);
   }
 
   private static List<Range> optimizeRanges(List<Range> ranges) {
-    List<Range> sorted = new ArrayList<Range>(ranges.stream()
+    List<Range> sorted = new ArrayList<>(ranges.stream()
         .sorted(Comparator.comparing((Range a) -> a.low).thenComparing(a -> a.high))
         .toList());
     List<Range> optimized = new ArrayList<>();
@@ -39,13 +37,13 @@ public class Cafeteria {
     return optimized;
   }
 
-  public static int idValidityQualifier(List<Range> ranges, BigInteger id) {
+  private static int idValidityQualifier(List<Range> ranges, BigInteger id) {
     return ranges.parallelStream().anyMatch(range -> range.low.compareTo(id) < 1 && range.high.compareTo(id) > -1)
         ? 1
         : 0;
   }
 
-  public static BigInteger cafeteriaTwo(List<Range> ranges, List<BigInteger> ids) {
+  public static BigInteger cafeteriaTwo(List<Range> ranges) {
     final List<Range> optimizedRanges = optimizeRanges(ranges);
     return optimizedRanges.stream()
         .map(range -> range.high.subtract(range.low).add(BigInteger.ONE))

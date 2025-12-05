@@ -25,8 +25,7 @@ public class CafeteriaTest extends TestCase {
 
   public void testLobbyTwo() {
     assertEquals(
-        new BigInteger("350684792662845"), Cafeteria.cafeteriaTwo(
-            Cafeteria.extractRangesFromFile("aoc-2025/day05/input-ranges.txt"),
-            Cafeteria.extractIdsFromFile("aoc-2025/day05/input.txt")));
+        new BigInteger("350684792662845"),
+        Cafeteria.cafeteriaTwo(Cafeteria.extractRangesFromFile("aoc-2025/day05/input-ranges.txt")));
   }
 }
